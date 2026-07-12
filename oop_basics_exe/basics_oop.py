@@ -85,3 +85,13 @@ shop_info = Coffe_shop('Brew House' , 'Tel Aviv' , 40)
 shop_info.open_shop()
 shop_info.close_shop()
 #7
+class Menu_item:
+    def __init__(self,name,price):
+        self.name = name
+        self.price = price
+        self.order_count = 0
+    def order(self):
+            self.order_count +=1
+            print(f'{self.name} orderd. total orders: {self.order_count}')
+item = Menu_item('Cappucciono' ,4.0)
+item.order()     
