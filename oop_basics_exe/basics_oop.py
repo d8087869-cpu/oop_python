@@ -1,3 +1,4 @@
+'''
 #1
 class Menuitem:
     def __init__(self,name,price):
@@ -94,4 +95,23 @@ class Menu_item:
             self.order_count +=1
             print(f'{self.name} orderd. total orders: {self.order_count}')
 item = Menu_item('Cappucciono' ,4.0)
-item.order()     
+item.order() 
+item.order()
+item.order()
+'''
+#8
+class Order:
+    def __init__(self,customer_name,items):
+        self.customer_name = customer_name
+        self.items = items
+    def item_count(self):
+        return len(self.items)
+    def print_order(self):
+        print(f'order for: {self.customer_name}')
+        print(f'items: {self.item_count()}')
+        for item in self.items:
+            print('-',item)
+orders = Order('Dana',['Latte','Croissant','OJ'])
+orders.item_count()
+orders.print_order()
+            
