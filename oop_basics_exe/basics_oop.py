@@ -135,3 +135,32 @@ barista.make_drink('OJ')
 barista.make_drink('Capoccino')
 print(barista.is_specialty('Espresso'))
 barista.shift_summary()
+#10 
+class Receipt:
+    def __init__(self, tax_rate):
+        self.tax_rate = tax_rate
+        self.items =[]
+    def add_item(self,name,price):
+        self.items.append((name,price))    
+    def subtotal(self):
+        total =0
+        for item in self.items:
+            total+=item[1]
+            return total    
+    def tax_amount(self):
+        return self.subtotal() * self.tax_rate
+    def total(self):
+        return self.subtotal() + self.tax_amount()
+
+    def print_receipt(self):
+        for name, price in self.items:
+            print(f"- {name}: ${price}")
+        print(f"Subtotal: ${self.subtotal()}")
+        print(f"Tax ({int(self.tax_rate * 100)}%): ${round(self.tax_amount(), 2)}")
+        print(f"Total: ${round(self.total(), 2)}")
+
+receipt = Receipt(0.17)
+receipt.add_item("Latte", 4.5)
+receipt.add_item("Croissant", 2.0)
+receipt.add_item("Water", 1.5)
+receipt.print_receipt()
