@@ -114,4 +114,24 @@ class Order:
 orders = Order('Dana',['Latte','Croissant','OJ'])
 orders.item_count()
 orders.print_order()
-            
+#9
+class Barista:
+    def __init__(self,name,specialty):
+        self.name =name
+        self.specialty = specialty
+        self.drinks_made= 0
+    def make_drink(self,drink_name):
+        print(f'{self.name} made a {drink_name}.')
+        self.drinks_made += 1  
+    def is_specialty(self,drink_name):
+        if drink_name == self.specialty:
+            return True
+    def shift_summary(self):
+        print(f'{self.name} made {self.drinks_made} drinks today') 
+barista = Barista('Yossi','Espresso') 
+barista.make_drink('Espresso')         
+barista.make_drink('Latte')
+barista.make_drink('OJ')
+barista.make_drink('Capoccino')
+print(barista.is_specialty('Espresso'))
+barista.shift_summary()
