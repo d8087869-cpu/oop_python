@@ -89,7 +89,7 @@ print("ready_by(10):", order.ready_by(10))
 print("ready_by(20):", order.ready_by(20))
 print("Slowest:", order.slowest_item())
 '''
-
+'''
 #4 
 class CoffeeShop:
     def __init__(self, name):
@@ -145,10 +145,8 @@ class Shift:
         self.drinks_target = drinks_target
     def duration(self):
         return self.end_hour - self.start_hour
-
     def drinks_per_hour(self):
         return self.drinks_target // self.duration()
-
     def is_long_shift(self):
         if self.duration() > 6:
             return True
@@ -158,6 +156,124 @@ class Shift:
         print(f"Barista: {self.barista_name} | Hours: {self.duration()} | Target: {self.drinks_target} | Per hour: {self.drinks_per_hour()} | Long shift: {self.is_long_shift()}")
 shift1 = Shift("Lior", 8, 16, 120)
 shift1.describe()
-
 shift2 = Shift("Dana", 9, 13, 40)
 shift2.describe()
+#7
+class MenuItem:
+    def __init__(self, name,price):
+        self.name = name
+        self.price = price
+class HappyHour:
+    def __init__(self, start_hour,end_hour,discount_percent):
+        self.start_hour = start_hour
+        self.end_hour = end_hour
+        self.discount_percent = discount_percent
+    def is_active(self, current_hour):
+        if self.start_hour <= current_hour < self.end_hour:
+            return True
+        else:
+            return False
+
+    def discounted_price(self, item):
+        return item.price * (1 - self.discount_percent / 100)
+beer = MenuItem("Beer", 20.0)
+happy_hour = HappyHour(16, 18, 20)
+print("is_active(17):", happy_hour.is_active(17))
+print("discounted_price:", happy_hour.discounted_price(beer))
+print("is_active(19):", happy_hour.is_active(19))
+'''
+
+'''
+#8
+class MenuItem:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+class Combo:
+    def __init__(self, name, items, discount):
+        self.name = name
+        self.items = items
+        self.discount = discount
+    def original_price(self):
+        total = 0
+        for item in self.items:
+            total = total + item.price
+        return total
+    def combo_price(self):
+        return self.original_price() * (1 - self.discount)
+    def savings(self):
+        return self.original_price() - self.combo_price()
+
+    def describe(self):
+        print(f"{self.name} | Original: ${self.original_price()} | Combo: ${self.combo_price()} | Savings: ${self.savings()}")
+espresso = MenuItem("Espresso", 3.5)
+croissant = MenuItem("Croissant", 2.5)
+breakfast_combo = Combo("Breakfast", [espresso, croissant], 0.1)
+breakfast_combo.describe()
+
+#9
+class MenuItem:
+    def __init__(self, name, price, category):
+        self.name = name
+        self.price = price
+        self.category = category
+class Menu:
+    def __init__(self):
+        self.items = []
+    def add_item(self, item):
+        self.items.append(item)
+    def find_by_name(self, name):
+        for item in self.items:
+            if item.name == name:
+                return item
+        return None
+    def filter_by_category(self, category):
+        result = []
+        for item in self.items:
+            if item.category == category:
+                result.append(item)
+        return result
+
+    def cheapest(self):
+        cheapest_item = self.items[0]
+        for item in self.items:
+            if item.price < cheapest_item.price:
+                cheapest_item = item
+        return cheapest_item
+    def most_expensive(self):
+        most_expensive_item = self.items[0]
+        for item in self.items:
+            if item.price > most_expensive_item.price:
+                most_expensive_item = item
+        return most_expensive_item
+    def average_price(self):
+        total = 0
+        for item in self.items:
+            total = total + item.price
+        return total / len(self.items)
+menu = Menu()
+menu.add_item(MenuItem("Espresso", 3.5, "hot drink"))
+menu.add_item(MenuItem("Iced tea", 2.5, "cold drink"))
+menu.add_item(MenuItem("Muffin", 2.0, "food"))
+menu.add_item(MenuItem("Sandwich", 5.0, "food"))
+menu.add_item(MenuItem("Latte", 4.0, "hot drink"))
+
+found = menu.find_by_name("Latte")
+if found is not None:
+    print("Found:", found.name)
+else:
+    print("Not found")
+
+not_found = menu.find_by_name("Pizza")
+print("Search for Pizza:", not_found)
+
+hot_drinks = menu.filter_by_category("hot drink")
+print("Hot drinks:")
+for item in hot_drinks:
+    print(" -", item.name)
+    
+print("Cheapest:", menu.cheapest().name)
+print("Most expensive:", menu.most_expensive().name)
+
+print("Average price:", menu.average_price())
+'''
