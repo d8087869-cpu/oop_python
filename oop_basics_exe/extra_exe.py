@@ -1,3 +1,4 @@
+#1
 class MenuItem:
     def __init__(self,name ,price,category):
         self.name = name
@@ -24,3 +25,40 @@ for item in items:
     print("is_drink():", item.is_drink())
     print("is_cheap(3.0):", item.is_cheap(3.0))
     print()
+
+#2
+class Customer:
+    def __init__(self, name, balance):
+        self.name = name
+        self.balance = balance
+        self.points = 0
+    def purchase(self, item_name, price):
+        if price <= self.balance:
+            self.balance = self.balance - price
+            self.points = self.points + 10
+        else:
+            print(f"Not enough balance for {item_name}.")
+    def redeem(self):
+        if self.points >= 50:
+            self.balance = self.balance + 5.0
+            self.points = 0
+    def status(self):
+        print(f"Name: {self.name} | Balance: ${self.balance} | Points: {self.points}")
+
+noa = Customer("Noa", 15.0)
+noa.status()
+
+noa.purchase("Coffee", 3.0)
+noa.status()
+
+noa.purchase("Cake", 4.0)
+noa.status()
+
+noa.purchase("Expensive Cake", 100.0)
+noa.status()
+
+noa.purchase("Tea", 2.0)
+noa.status()
+
+noa.redeem()
+noa.status()
