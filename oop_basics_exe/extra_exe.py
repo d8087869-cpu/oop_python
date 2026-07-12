@@ -277,3 +277,43 @@ print("Most expensive:", menu.most_expensive().name)
 
 print("Average price:", menu.average_price())
 '''
+class Table:
+    def __init__(self, table_number, seats):
+        self.table_number = table_number
+        self.seats = seats
+        self.is_occupied = False
+        self.current_order = None
+
+    def seat_customers(self, count):
+        if self.is_occupied:
+            print(f"Table {self.table_number} is already occupied.")
+        elif count > self.seats:
+            print(f"Cannot seat {count} at Table {self.table_number} (only {self.seats} seats).")
+        else:
+            self.is_occupied = True
+            print(f"Table {self.table_number} | Seated {count}")
+
+    def take_order(self, order_text):
+        if self.is_occupied:
+            self.current_order = order_text
+            print(f"Order taken: {order_text}")
+        else:
+            print("No customers seated.")
+
+    def bill_out(self):
+        print(f"Bill for Table {self.table_number}: {self.current_order}")
+        self.is_occupied = False
+        self.current_order = None
+    def status(self):
+        print(f"Table {self.table_number} | Seats: {self.seats} | Occupied: {self.is_occupied} | Order: {self.current_order}")
+table3 = Table(3, 4)
+
+table3.seat_customers(3)
+table3.status()
+
+table3.take_order("2 lattes")
+table3.status()
+
+table3.bill_out()
+table3.status()
+table3.seat_customers(5)
