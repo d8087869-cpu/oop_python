@@ -62,3 +62,26 @@ item.sell()
 item.status()
 item.restock()
 item.status()           
+#6
+class Coffe_shop:
+    def __init__(self,name,city,capacity):
+        self.name = name
+        self.city = city
+        self.capacity = capacity
+        self.is_open = False
+    def open_shop(self): 
+        if not self.is_open :
+            self.is_open == True
+            print(f'{self.name} is now open in {self.city}! capasity {self.capacity} seats.')
+        else:
+            print(f'{self.is_open} is alrady open')
+    def close_shop(self):
+        if  self.is_open:
+            print(f'{self.name} is alredy closed. see you tomorrow!')
+        else:
+            self.is_open=False
+            print(f'{self.name} is closed. see you tomorrow!')
+shop_info = Coffe_shop('Brew House' , 'Tel Aviv' , 40)
+shop_info.open_shop()
+shop_info.close_shop()
+#7
