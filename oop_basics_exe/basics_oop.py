@@ -1,3 +1,4 @@
+'''
 #1
 class Menuitem:
     def __init__(self,name,price):
@@ -62,3 +63,104 @@ item.sell()
 item.status()
 item.restock()
 item.status()           
+#6
+class Coffe_shop:
+    def __init__(self,name,city,capacity):
+        self.name = name
+        self.city = city
+        self.capacity = capacity
+        self.is_open = False
+    def open_shop(self): 
+        if not self.is_open :
+            self.is_open == True
+            print(f'{self.name} is now open in {self.city}! capasity {self.capacity} seats.')
+        else:
+            print(f'{self.is_open} is alrady open')
+    def close_shop(self):
+        if  self.is_open:
+            print(f'{self.name} is alredy closed. see you tomorrow!')
+        else:
+            self.is_open=False
+            print(f'{self.name} is closed. see you tomorrow!')
+shop_info = Coffe_shop('Brew House' , 'Tel Aviv' , 40)
+shop_info.open_shop()
+shop_info.close_shop()
+#7
+class Menu_item:
+    def __init__(self,name,price):
+        self.name = name
+        self.price = price
+        self.order_count = 0
+    def order(self):
+            self.order_count +=1
+            print(f'{self.name} orderd. total orders: {self.order_count}')
+item = Menu_item('Cappucciono' ,4.0)
+item.order() 
+item.order()
+item.order()
+'''
+#8
+class Order:
+    def __init__(self,customer_name,items):
+        self.customer_name = customer_name
+        self.items = items
+    def item_count(self):
+        return len(self.items)
+    def print_order(self):
+        print(f'order for: {self.customer_name}')
+        print(f'items: {self.item_count()}')
+        for item in self.items:
+            print('-',item)
+orders = Order('Dana',['Latte','Croissant','OJ'])
+orders.item_count()
+orders.print_order()
+#9
+class Barista:
+    def __init__(self,name,specialty):
+        self.name =name
+        self.specialty = specialty
+        self.drinks_made= 0
+    def make_drink(self,drink_name):
+        print(f'{self.name} made a {drink_name}.')
+        self.drinks_made += 1  
+    def is_specialty(self,drink_name):
+        if drink_name == self.specialty:
+            return True
+    def shift_summary(self):
+        print(f'{self.name} made {self.drinks_made} drinks today') 
+barista = Barista('Yossi','Espresso') 
+barista.make_drink('Espresso')         
+barista.make_drink('Latte')
+barista.make_drink('OJ')
+barista.make_drink('Capoccino')
+print(barista.is_specialty('Espresso'))
+barista.shift_summary()
+#10 
+class Receipt:
+    def __init__(self, tax_rate):
+        self.tax_rate = tax_rate
+        self.items =[]
+    def add_item(self,name,price):
+        self.items.append((name,price))    
+    def subtotal(self):
+        total =0
+        for item in self.items:
+            total+=item[1]
+            return total    
+    def tax_amount(self):
+        return self.subtotal() * self.tax_rate
+    def total(self):
+        return self.subtotal() + self.tax_amount()
+
+    def print_receipt(self):
+        for name, price in self.items:
+            print(f"- {name}: ${price}")
+        print(f"Subtotal: ${self.subtotal()}")
+        print(f"Tax ({int(self.tax_rate * 100)}%): ${round(self.tax_amount(), 2)}")
+        print(f"Total: ${round(self.total(), 2)}")
+
+receipt = Receipt(0.17)
+receipt.add_item("Latte", 4.5)
+receipt.add_item("Croissant", 2.0)
+receipt.add_item("Water", 1.5)
+receipt.print_receipt()
