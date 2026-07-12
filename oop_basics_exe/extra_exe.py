@@ -1,3 +1,4 @@
+'''
 #1
 class MenuItem:
     def __init__(self,name ,price,category):
@@ -25,7 +26,7 @@ for item in items:
     print("is_drink():", item.is_drink())
     print("is_cheap(3.0):", item.is_cheap(3.0))
     print()
-
+'''
 #2
 class Customer:
     def __init__(self, name, balance):
@@ -50,15 +51,39 @@ noa.status()
 
 noa.purchase("Coffee", 3.0)
 noa.status()
-
-noa.purchase("Cake", 4.0)
-noa.status()
-
-noa.purchase("Expensive Cake", 100.0)
-noa.status()
-
-noa.purchase("Tea", 2.0)
-noa.status()
-
 noa.redeem()
 noa.status()
+
+#3
+class Order:
+    def __init__(self, customer_name, items):
+        self.customer_name = customer_name
+        self.items = items
+    def total_prep_time(self):
+        total = 0
+        for name, minutes in self.items:
+            total = total + minutes
+        return total
+    def ready_by(self, minutes):
+        if self.total_prep_time() <= minutes:
+            return True
+        else:
+            return False
+    def print_order(self):
+        for name, minutes in self.items:
+            print(f"{name} - {minutes} min")
+    def slowest_item(self):
+        slowest_name = self.items[0][0]
+        slowest_time = self.items[0][1]
+        for name, minutes in self.items:
+            if minutes > slowest_time:
+                slowest_time = minutes
+                slowest_name = name
+
+        return slowest_name
+order = Order("Moshe", [("Latte", 3), ("Sandwich", 7), ("Smoothie", 5)])
+order.print_order()
+print("Total prep:", order.total_prep_time(), "min")
+print("ready_by(10):", order.ready_by(10))
+print("ready_by(20):", order.ready_by(20))
+print("Slowest:", order.slowest_item())
