@@ -158,3 +158,51 @@ for _ in range(5):
 
 remaining = member.session_needed(10)
 print(f"{member.sessions_completed} sessions completed. {remaining} more needed.")
+
+#9
+class Athlete:
+    def __init__(self,name,age,position):
+        self.name =name
+        self.age=age
+        self.position =position
+    def player_card(self):
+        print(f'name: {self.name} | age: {self.age} | position: {self.position}')
+class BasketballPlayer(Athlete):
+    def __init__(self, name, age, position,jersey_number):
+        super().__init__(name, age, position)
+        self.jersey_number = jersey_number
+    def full_profile(self):
+        self.player_card()
+        print(f"Jersey: #{self.jersey_number}")
+
+players = [
+    BasketballPlayer("Mia", 24, "guard", 7),
+    BasketballPlayer("BOb", 29, "forward", 11),
+    BasketballPlayer("Gabi", 22, "center", 34),]
+for p in players:
+    p.full_profile()
+
+#10
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    def greet(self):
+        print(f"Hi, I am {self.name}.")
+class Athlete(Person):
+    def __init__(self, name, age, sport):
+        super().__init__(name, age)
+        self.sport = sport
+    def train(self):
+        print(f"{self.name} is training for {self.sport}.")
+class ProfessionalAthlete(Athlete):
+    def __init__(self, name, age, sport, sponsor):
+        super().__init__(name, age, sport)
+        self.sponsor = sponsor
+    def sponsor_info(self):
+        print(f"{self.name} is sponsored by {self.sponsor}.")
+
+pro = ProfessionalAthlete("Ronaldo", 39, "football", "Nike")
+pro.greet()
+pro.train()
+pro.sponsor_info()
