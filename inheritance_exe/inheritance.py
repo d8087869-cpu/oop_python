@@ -135,4 +135,26 @@ print(s.personal_best)
 
 
 #8
+class Athlete:
+    def __init__(self,name,age):
+        self.name=name
+        self.age=age
+        self.sessions_completed=0
+    def train(self):
+        self.sessions_completed+=1
+    def session_needed(self,target):
+        return max(target - self.sessions_completed, 0)
+class Triathlete(Athlete):
+    def __init__(self, name, age,discipline):
+        super().__init__(name, age)
+        self.discipline = discipline
+    def describe(self):
+        print(f'triathlete {self.name}, age {self.age},disciplain: {self.discipline}')
 
+member = Triathlete('Dan',26,'cycling')
+member.describe()
+for _ in range(5):
+    member.train()
+
+remaining = member.session_needed(10)
+print(f"{member.sessions_completed} sessions completed. {remaining} more needed.")
