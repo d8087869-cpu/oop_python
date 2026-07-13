@@ -112,3 +112,49 @@ class TeamSportPlayer(Athlete):
 player = TeamSportPlayer('Gal',28,10,'Maccabi')
 player.experience()
 player.team_info()
+
+#7 
+class Athlete:
+    def __init__(self,name,sport):
+        self.name =name
+        self.sport=sport
+        self.personal_best = None
+    def set_record(self,value):
+        self.personal_best = value
+        print(f'new record {value}')
+    def has_record(self):    
+        return self.personal_best is not None
+class Sprinter(Athlete):
+    def __init__(self, name):
+        super().__init__(name, sport='100m_Sprint')
+s = Sprinter("Usain")
+print(f"has_record() -> {s.has_record()}")
+s.set_record(10.8)
+print(f"has_record() -> {s.has_record()}")
+print(s.personal_best)
+
+
+#8
+class Athlete:
+    def __init__(self,name,age):
+        self.name=name
+        self.age=age
+        self.sessions_completed=0
+    def train(self):
+        self.sessions_completed+=1
+    def session_needed(self,target):
+        return max(target - self.sessions_completed, 0)
+class Triathlete(Athlete):
+    def __init__(self, name, age,discipline):
+        super().__init__(name, age)
+        self.discipline = discipline
+    def describe(self):
+        print(f'triathlete {self.name}, age {self.age},disciplain: {self.discipline}')
+
+member = Triathlete('Dan',26,'cycling')
+member.describe()
+for _ in range(5):
+    member.train()
+
+remaining = member.session_needed(10)
+print(f"{member.sessions_completed} sessions completed. {remaining} more needed.")
