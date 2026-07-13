@@ -20,3 +20,19 @@ logger2 = Logger()
 print("Logger1:", id(logger1))
 print("Logger2:", id(logger2))
 print("Same object?", logger1 is logger2)
+#2
+class AppSettings:
+    _instance = None
+
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+            cls._instance.theme = "dark"
+        return cls._instance
+
+# Test
+settings1 = AppSettings()
+settings2 = AppSettings()
+
+settings1.theme = "light"  # change through first object
+print("Theme from second object:", settings2.theme)
