@@ -112,3 +112,27 @@ class TeamSportPlayer(Athlete):
 player = TeamSportPlayer('Gal',28,10,'Maccabi')
 player.experience()
 player.team_info()
+
+#7 
+class Athlete:
+    def __init__(self,name,sport):
+        self.name =name
+        self.sport=sport
+        self.personal_best = None
+    def set_record(self,value):
+        self.personal_best = value
+        print(f'new record {value}')
+    def has_record(self):    
+        return self.personal_best is not None
+class Sprinter(Athlete):
+    def __init__(self, name):
+        super().__init__(name, sport='100m_Sprint')
+s = Sprinter("Usain")
+print(f"has_record() -> {s.has_record()}")
+s.set_record(10.8)
+print(f"has_record() -> {s.has_record()}")
+print(s.personal_best)
+
+
+#8
+
