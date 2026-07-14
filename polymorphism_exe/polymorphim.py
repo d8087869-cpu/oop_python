@@ -32,6 +32,7 @@ lamp.deactivate()
 ac = SmartAC('Living Room AC')
 ac.deactivate()        
 '''
+'''
 #3
 class Device:
     def __init__(self,name,is_on):
@@ -64,3 +65,58 @@ tv = SamrtTV('LG',True,8)
 tv.status()
 speaker = SamrtSpeaker(f'Alexa',True,"Bohemian Rhapsody")
 speaker.status()
+'''
+'''
+#4
+class Device:
+    def __init__(self,name):
+        self.name=name
+    def activaet(self):
+        print(f'{self.name} is on.')
+class SmartTv(Device):
+    def activaet(self):
+        print(f'TV {self.name} is playing the home screen')
+class SmartLamp(Device):
+    def activaet(self):
+        print(f'{self.name} is glowing warmly.')
+class SmartSpeaker(Device):
+    def activaet(self):
+        print(f'Speaker {self.name} is ready to play music')
+
+tv = SmartTv('LG')
+lamp=SmartLamp('Desk Lamp')
+speaker=SmartSpeaker('Echo')
+devices= [SmartTv('LG'),SmartLamp('Desk Lamp'),SmartSpeaker('Echo')]
+for device in devices:
+    device.activaet()
+'''
+#5 
+class Device:
+    def __init__(self,name):
+        self.name=name
+    def set_volume(self,level):
+        self.level =level
+        print(f'Device {self.name} volume set to {self.level}')
+class SmartSpeaker(Device):
+    def set_volume(self,level):
+        self.level = level
+        print(f'Speaker {self.name} is now at volume {self.level}/10')
+        if self.level > 7:
+            print('loud')
+        else:
+            print("Up the volume")
+class SmartTV(Device):
+    def set_volume(self,level):
+        self.level =level
+        print(f'TV {self.name} volume: {self.level}.')
+        if self.level == 0:
+            print('muted!')
+        else:
+            print('')
+speaker = SmartSpeaker("BOSE")
+speaker.set_volume(9)
+speaker.set_volume(3)
+
+tv =SmartTV('LG')
+tv.set_volume(0)
+tv.set_volume(5)
