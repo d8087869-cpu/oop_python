@@ -120,3 +120,30 @@ speaker.set_volume(3)
 tv =SmartTV('LG')
 tv.set_volume(0)
 tv.set_volume(5)
+#6
+class Device:
+    def __init__(self, name):
+        self.name = name
+    def run_command(self, cmd):
+        print(f"Device {self.name} received command: {cmd}.")
+class SmartTV(Device):
+    def run_command(self, cmd):
+        print(f"TV {self.name} is executing '{cmd}' on the screen.")
+class SmartLamp(Device):
+    def run_command(self, cmd):
+        print(f"Lamp {self.name} is adjusting brightness for '{cmd}'.")
+class SmartSpeaker(Device):
+    def run_command(self, cmd):
+        print(f"Speaker {self.name} is playing a sound for '{cmd}'.")
+class SmartAC(Device):
+    def run_command(self, cmd):
+        print(f"AC {self.name} is changing temperature for '{cmd}'.")
+def send_command(device, cmd):
+    device.run_command(cmd)
+devices = [
+    SmartTV("Samsung"),
+    SmartLamp("Desk Lamp"),
+    SmartSpeaker("Echo"),
+    SmartAC("Living Room AC")]
+for device in devices:
+    send_command(device, "start")
