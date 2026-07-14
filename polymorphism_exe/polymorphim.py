@@ -147,3 +147,69 @@ devices = [
     SmartAC("Living Room AC")]
 for device in devices:
     send_command(device, "start")
+
+#7
+class Device:
+    def __init__(self,name):
+        self.name = name
+    def run_schedule(self,hour):
+        print(f'{self.name} is idle')
+class SmartLamp(Device):
+    def run_schedule(self, hour):
+        if 18<= hour<= 23:
+            print(f'{self.name}: turning on.')
+        else:
+            print(f'{self.name}: turning off.')
+class SmartAC(Device):
+    def run_schedule(self, hour):
+        if 12<= hour<=20:
+            print(f'{self.name}: turning on.')
+        else:
+            print(f'{self.name} turning: off.')
+class SmartTV(Device):
+    def run_schedule(self, hour):
+        if 20 <= hour<=23:
+            print(f'{self.name} turning: on')
+        else:
+            print(f'{self.name} turning: off.')
+
+lamp = SmartLamp("Bedroom Lamp")
+ac = SmartAC("Living Room AC")
+tv = SmartTV("Samsung TV")
+lamp.run_schedule(21)
+ac.run_schedule(21)
+tv.run_schedule(21)
+
+#8
+class Device: 
+    def __init__(self,name):
+        self.name =name
+    def energy_usage(self):
+        print( " 10 watts")
+class SmartTV(Device):
+    def energy_usage(self):
+        return 150
+class SmartAC(Device):
+    def energy_usage(self):
+        return 900
+class SmartLamp(Device):
+    def energy_usage(self):
+        return 8
+class SmartSpeaker(Device):
+    def energy_usage(self):
+        return 30
+
+devices = [
+    SmartTV("Samsung"),
+    SmartAC("Living Room AC"),
+    SmartLamp("Desk Lamp"),
+    SmartSpeaker("Echo")]
+total_energy = 0
+for device in devices:
+    watts = device.energy_usage()
+    print(f"{watts}W")
+    total_energy = total_energy + watts
+
+print(f'Total: {total_energy}W')
+
+#9
