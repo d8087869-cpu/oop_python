@@ -192,3 +192,62 @@ profile = UserProfile('david')
 profile.show_email =True
 profile.is_public = 'yes'
 profile.privacy_summary()
+
+#10 
+class UserAccount:
+    def __init__(self,username,email,password,age):
+        self.__username = username
+        self.__email=email
+        self.__password=password
+        self.__age = age
+        self._login_count = 0
+    @property
+    def username(self):
+        return self.__username
+    @username.setter
+    def username(self,new_username):
+        if len(new_username) >= 3:
+            self.__username = new_username
+        else:
+            print('username too short')
+    @property
+    def email(self):
+        return self.__email
+    @email.setter
+    def email(self,new_email):
+        if '@' in new_email:
+            self.__email =new_email
+        else:
+            print('invalid email')
+    @property
+    def age(self):
+        return self.__age
+    @age.setter
+    def age(self,new_age):
+        if new_age>= 13 and new_age <=120:
+            self.__age=new_age
+        else:
+            print('invalid age')
+    
+    def password(self,old,new):
+        if old == self.__password:
+            self.__password = new 
+            print('password change')
+        else:
+            print('incorrect old password')
+    def login(self,password):
+        if password == self.__password:
+            self._login_count = self._login_count +1 
+            print('welcome')
+        else:
+            print('login failed')
+
+    def account_summary(self):
+        print(f'username {self.__username} | email: {self.__email} | age: {self.__age} | logins: {self._login_count}')
+account= UserAccount('user1' , 'u@mail.com', 'pass123', 20)
+account.login('worng1')
+account.login('worng2')
+account.login('pass123')
+account.email = "newuser1@mail.com"
+account.age = 25
+account.account_summary()
