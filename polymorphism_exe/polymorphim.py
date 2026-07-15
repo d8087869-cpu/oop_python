@@ -90,6 +90,7 @@ devices= [SmartTv('LG'),SmartLamp('Desk Lamp'),SmartSpeaker('Echo')]
 for device in devices:
     device.activaet()
 '''
+'''
 #5 
 class Device:
     def __init__(self,name):
@@ -211,5 +212,118 @@ for device in devices:
     total_energy = total_energy + watts
 
 print(f'Total: {total_energy}W')
-
+'''
 #9
+class Device:
+    def __init__(self,name):
+        self.name= name
+    def activate(self):
+        print(f"Device {self.name} is now on.")
+    def deactivate(self):
+        print(f"Device {self.name} is now off.")
+    def status(self):
+        print(f"Device {self.name} status unknon.")
+
+class SmartTV(Device):
+    def activate(self):
+        print(f"TV {self.name} is playing the home screen.")
+    def deactivate(self):
+        print(f"TV {self.name} is turning off.")
+    def status(self):
+        print(f"{self.name}: TV is ready.")
+
+class SmartLamp(Device):
+    def activate(self):
+        print(f"Lamp {self.name} is glowing.")
+    def deactivate(self):
+        print(f"Lamp {self.name} is dimming and turning off.")
+    def status(self):
+        print(f"{self.name}: Lamp is set.")
+
+class SmartSpeaker(Device):
+    def activate(self):
+        print(f"Speaker {self.name} is ready to play music.")
+    def deactivate(self):
+        print(f"Speaker {self.name} is powering down.")
+    def status(self):
+        print(f"{self.name}: Speaker is standing by.")
+
+class SmartAC(Device):
+    def activate(self):
+        print(f"AC {self.name} is cooling the room.")
+    def deactivate(self):
+        print(f"AC {self.name} is cooling down and switching off.")
+    def status(self):
+        print(f"{self.name}: AC is regulating temperature.")
+
+class SmartLock(Device):
+    def activate(self):
+        print(f"Lock {self.name} is unlocking.")
+    def deactivate(self):
+        print(f"Lock {self.name} is locking.")
+    def status(self):
+        print(f"{self.name}: Lock is secured.")
+
+class HomeSystem:
+    def __init__(self, devices):
+        self.devices = devices
+    def activate_all(self):
+        for device in self.devices:
+            device.activate()
+    def deactivate_all(self):
+        for device in self.devices:
+            device.deactivate()
+    def system_report(self):
+        for device in self.devices:
+            device.status()
+
+devices = [
+    SmartTV("Samsung"),
+    SmartLamp("Desk Lamp"),
+    SmartSpeaker("Echo"),
+    SmartAC("Living Room AC"),
+    SmartLock("Front Door")]
+home = HomeSystem(devices)
+print("--- Activating all devices ---")
+home.activate_all()
+print("--- Deactivating all devices ---")
+home.deactivate_all()
+print("--- System report ---")
+home.system_report()
+
+#10
+class Device:
+    def __init__(self,name):
+        self.name = name 
+    def trigger_alarm(self,alert_type):
+        print(f"{self.name} received alert: {alert_type}.")
+class SmartLamp(Device):
+        def trigger_alarm(self, alert_type):
+            print(f"Lamp {self.name} is flashing on and off : {alert_type}.")
+class SmartSpeaker(Device):
+        def trigger_alarm(self, alert_type):
+            print(f"Speaker {self.name} is playing a loud for alert: {alert_type}.")
+class SmartTV(Device):
+    def trigger_alarm(self, alert_type):
+        print(f"TV {self.name} is showing an emergency broadcast for alert: {alert_type}.")
+class SmartDoorLock(Device):
+    def trigger_alarm(self, alert_type):
+        print(f"Lock {self.name} is locking the door. Confirmed locked due to alert: {alert_type}.")
+class AlarmSystem:
+    def __init__(self, devices):
+        self.devices = devices
+    def send_alert(self, alert_type):
+        for device in self.devices:
+            device.trigger_alarm(alert_type)
+devices = [
+    SmartLamp("Bedroom Lamp"),
+    SmartSpeaker("Echo"),
+    SmartTV("Samsung TV"),
+    SmartDoorLock("Front Door")]
+
+alarm_system = AlarmSystem(devices)
+print("--- Fire alert ---")
+alarm_system.send_alert("fire")
+
+print("--- Break-in alert ---")
+alarm_system.send_alert("break-in")
