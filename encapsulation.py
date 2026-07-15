@@ -142,9 +142,53 @@ class Post:
     def status(self):
         print(f'post by {self.auther}: {self.likes} likes')
 post = Post('alice', 'hello world')
-
 post.like('charlie')
 post.like('david')
 post.unlike('bob')
 post.like('gabi')
 post.status()
+
+# 9  
+class UserProfile:
+    def __init__(self,username):
+        self.username = username
+        self.__is_public = True
+        self.__show_email= False
+        self.__show_age = False
+    @property
+    def is_public(self):
+        return self.__is_public
+    @is_public.setter
+    def is_public(self,value):
+        if isinstance(value, bool):
+            self.__is_public= value
+        else:
+             print("is_public must be True or False.")
+
+    @property
+    def show_email(self):
+        return self.__show_email
+    @show_email.setter
+    def show_email(self, value):
+        if isinstance(value, bool):
+            self.__show_email = value
+        else:
+            print("show_email must be True or False.")
+
+    @property
+    def show_age(self):
+        return self.__show_age
+    @show_age.setter
+    def show_age(self, value):
+        if isinstance(value, bool):
+            self.__show_age = value
+        else:
+            print("show_age must be True or False.")
+
+    def privacy_summary(self):
+        print(f"is_public: {self.__is_public} | show_email: {self.__show_email} | show_age: {self.__show_age}")
+
+profile = UserProfile('david')
+profile.show_email =True
+profile.is_public = 'yes'
+profile.privacy_summary()
