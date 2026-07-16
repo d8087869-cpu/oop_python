@@ -78,3 +78,20 @@ print(f'ETA: {bike.get_eta()} minutes')
 drone = DroneDelivery()
 print(drone.deliver(1))
 print(f'ETA: {drone.get_eta()} minutes')
+
+#5
+from abc import ABC,abstractmethod
+class DeliveryMethod(ABC):
+    @abstractmethod
+    def deliver(self,order_id):
+        pass
+class BrokenDelivery(DeliveryMethod):
+    pass
+#broken = BrokenDelivery()
+class FixDelivery(DeliveryMethod):
+    def deliver(self, order_id):
+        return (f'order {order_id} was deliverd by fixed ')
+fixed = FixDelivery()
+print(fixed.deliver(5))
+
+#6
