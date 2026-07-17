@@ -95,3 +95,60 @@ fixed = FixDelivery()
 print(fixed.deliver(5))
 
 #6
+class DeliveryFee:
+    @staticmethod
+    def calculate(distance_km, rate_per_km):
+        return distance_km * rate_per_km
+
+    @staticmethod
+    def with_surcharge(base_fee, surcharge_percent):
+        return base_fee * (1 + surcharge_percent / 100)
+
+    @staticmethod
+    def is_free(distance_km):
+        if distance_km <= 2.0:
+            return True
+        else:
+            return False
+print(DeliveryFee.calculate(5, 3.0))
+print(DeliveryFee.with_surcharge(15.0, 10))
+print(DeliveryFee.is_free(1.5))
+
+#7
+from abc import ABC, abstractmethod
+
+
+class DeliveryMethod(ABC):
+    @abstractmethod
+    def deliver(self, order_id):
+        pass
+
+    @abstractmethod
+    def get_eta(self):
+        pass
+
+class WalkingDelivery(DeliveryMethod):
+    def deliver(self, order_id):
+        return f"Order {order_id} delivered by walking."
+    def get_eta(self):
+        return 60
+    
+class ExpressDelivery(DeliveryMethod):
+    def deliver(self, order_id):
+        return f"Order {order_id} delivered by express."
+    def get_eta(self):
+        return 10
+    
+class DeliveryHelper:
+    @staticmethod
+    def faster(d1, d2):
+        if d1.get_eta() < d2.get_eta():
+            return d1
+        else:
+            return d2
+
+walking = WalkingDelivery()
+express = ExpressDelivery()
+
+faster_option = DeliveryHelper.faster(walking, express)
+print(f"Faster option: {faster_option.__class__.__name__}")
