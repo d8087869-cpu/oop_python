@@ -152,3 +152,64 @@ express = ExpressDelivery()
 
 faster_option = DeliveryHelper.faster(walking, express)
 print(f"Faster option: {faster_option.__class__.__name__}")
+
+#8
+from abc import ABC, abstractmethod
+
+class Notifier(ABC):
+    @abstractmethod
+    def send(self, recipient, message):
+        pass
+
+class PushNotifier(Notifier):
+    def send(self, recipient, message):
+        return f"Push to {recipient}: {message}"
+
+class WhatsAppNotifier(Notifier):
+    def send(self, recipient, message):
+        return f"WhatsApp to {recipient}: {message}"
+
+class InAppNotifier(Notifier):
+    def send(self, recipient, message):
+        return f"In-app banner for {recipient}: {message}"
+
+notifiers = [PushNotifier(), WhatsAppNotifier(), InAppNotifier()]
+for notifier in notifiers:
+    print(notifier.send("customer_42", "Your order is on the way!"))
+
+
+#9
+from abc import ABC, abstractmethod
+
+
+class Restaurant(ABC):
+    @abstractmethod
+    def get_menu(self):
+        pass
+
+    @abstractmethod
+    def prepare_order(self, item_name):
+        pass
+
+class ItalianRestaurant(Restaurant):
+    def get_menu(self):
+        return ['pasta', 'pizza', 'tiramisu']
+    def prepare_order(self, item_name):
+        print(f"Preparing {item_name} the Italian way.")
+
+class SushiRestaurant(Restaurant):
+    def get_menu(self):
+        return ['maki', 'nigiri', 'ramen']
+    def prepare_order(self, item_name):
+        print(f"Preparing {item_name} in Japanese style.")
+
+class BurgerJoint(Restaurant):
+    def get_menu(self):
+        return ['burger', 'fries', 'shake']
+    def prepare_order(self, item_name):
+        print(f"Grilling up a {item_name} , fast food style.")
+
+restaurants = [ItalianRestaurant(), SushiRestaurant(), BurgerJoint()]
+for restaurant in restaurants:
+    print(restaurant.get_menu())
+    restaurant.prepare_order(restaurant.get_menu()[0])
