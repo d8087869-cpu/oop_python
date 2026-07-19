@@ -177,10 +177,8 @@ notifiers = [PushNotifier(), WhatsAppNotifier(), InAppNotifier()]
 for notifier in notifiers:
     print(notifier.send("customer_42", "Your order is on the way!"))
 
-
 #9
 from abc import ABC, abstractmethod
-
 
 class Restaurant(ABC):
     @abstractmethod
@@ -213,3 +211,86 @@ restaurants = [ItalianRestaurant(), SushiRestaurant(), BurgerJoint()]
 for restaurant in restaurants:
     print(restaurant.get_menu())
     restaurant.prepare_order(restaurant.get_menu()[0])
+
+#10
+
+from abc import ABC, abstractmethod
+
+class DeliveryMethod(ABC):
+    @abstractmethod
+    def deliver(self, order_id):
+        pass
+
+    @abstractmethod
+    def get_eta(self):
+        pass
+
+    @abstractmethod
+    def get_cost(self, distance_km):
+        pass
+
+class BikeDelivery(DeliveryMethod):
+    def deliver(self, order_id):
+        return f"Order {order_id} delivered by bike."
+
+    def get_eta(self):
+        return 30
+
+    def get_cost(self, distance_km):
+        return distance_km * 1.0
+
+class DroneDelivery(DeliveryMethod):
+    def deliver(self, order_id):
+        return f"Order {order_id} dropped by drone at your door."
+
+    def get_eta(self):
+        return 15
+
+    def get_cost(self, distance_km):
+        return distance_km * 2.5
+
+class CarDelivery(DeliveryMethod):
+    def deliver(self, order_id):
+        return f"Order {order_id} brought to your building by car."
+
+    def get_eta(self):
+        return 20
+
+    def get_cost(self, distance_km):
+        return distance_km * 1.8
+
+class WalkingDelivery(DeliveryMethod):
+    def deliver(self, order_id):
+        return f"Order {order_id} delivered by walking courier."
+
+    def get_eta(self):
+        return 60
+
+    def get_cost(self, distance_km):
+        return distance_km * 0.5
+
+class Platform:
+    def __init__(self, delivery_methods):
+        self.delivery_methods = delivery_methods
+
+    def cheapest_option(self, distance_km):
+        cheapest = self.delivery_methods[0]
+        for method in self.delivery_methods:
+            if method.get_cost(distance_km) < cheapest.get_cost(distance_km):
+                cheapest = method
+        return cheapest
+
+    def fastest_option(self):
+        fastest = self.delivery_methods[0]
+        for method in self.delivery_methods:
+            if method.get_eta() < fastest.get_eta():
+                fastest = method
+        return fastest
+
+all_methods = [BikeDelivery(), DroneDelivery(), CarDelivery(), WalkingDelivery()]
+platform = Platform(all_methods)
+
+cheapest = platform.cheapest_option(5.0)
+fastest = platform.fastest_option()
+print(f"Cheapest: {cheapest.__class__.__name__}")
+print(f"Fastest: {fastest.__class__.__name__}")
